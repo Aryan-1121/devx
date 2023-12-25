@@ -2,15 +2,14 @@
 
 
 
+function findSum(a,b){
+    // returning summation of 2 inputs
+    return a+b;
+}
 
 
-
-
-
-
-
-
-
+const value = findSum(4,5);
+console.log(value)
 
 
 
