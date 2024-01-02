@@ -80,7 +80,7 @@
 
 
 
-// if we have multiple Async functions running parallely then despite their order of writting the one which gets completed 1st will be on 1st priority of callback queue (its a queue which stores the async function result) which is later on picked by "event loop" into "call Stack"
+// if we have multiple Async functions running parallely then despite their order of writting the one which gets completed 1st will be on 1st priority of callback queue (its a queue which stores the async function result) which is later on pulled by "event loop" into "call Stack"
 
 
 
