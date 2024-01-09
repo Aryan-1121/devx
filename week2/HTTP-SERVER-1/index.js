@@ -1,0 +1,22 @@
+const express = require("express");
+
+const port =3000;
+
+
+const app = express();
+
+
+
+app.get("/", function(req, res){
+    res.send("HELLO WORLD !!!");
+});
+
+
+app.listen(port);
+
+
+
+
+
+
+
