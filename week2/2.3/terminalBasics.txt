@@ -1,0 +1,150 @@
+warlord@Warlord:~$ ls
+assignments  dev        Downloads  Pictures  snap       Videos
+Desktop      Documents  Music      Public    Templates
+warlord@Warlord:~$ pwd
+/home/warlord
+warlord@Warlord:~$ cd 
+assignments/  Documents/    .mozilla/     Public/       Videos/
+.cache/       .dotnet/      Music/        snap/         .vscode/
+.config/      Downloads/    .npm/         .ssh/         
+Desktop/      .gnupg/       Pictures/     Templates/    
+dev/          .local/       .pki/         .thunderbird/ 
+warlord@Warlord:~$ cd abc
+bash: cd: abc: No such file or directory
+warlord@Warlord:~$ mkdir test
+warlord@Warlord:~$ touch a.txt
+warlord@Warlord:~$ ls
+assignments  Desktop  Documents  Music     Public  Templates  Videos
+a.txt        dev      Downloads  Pictures  snap    test
+warlord@Warlord:~$ rm a.txt 
+warlord@Warlord:~$ ls
+assignments  dev        Downloads  Pictures  snap       test
+Desktop      Documents  Music      Public    Templates  Videos
+warlord@Warlord:~$ cd test/
+warlord@Warlord:~/test$ ls
+warlord@Warlord:~/test$ vi a.txt
+warlord@Warlord:~/test$ ls
+warlord@Warlord:~/test$ vi a.txt
+warlord@Warlord:~/test$ ls
+a.txt
+warlord@Warlord:~/test$ touct b.txt
+Command 'touct' not found, did you mean:
+  command 'touch' from deb coreutils (8.32-4.1ubuntu1)
+Try: apt install <deb name>
+warlord@Warlord:~/test$ touch b.txt
+warlord@Warlord:~/test$ vi 
+a.txt  b.txt  
+warlord@Warlord:~/test$ vi
+vi        view      viewres   vigr      vim.tiny  vipw      visudo
+warlord@Warlord:~/test$ vi a.txt 
+warlord@Warlord:~/test$ ls
+a.txt  b.txt
+warlord@Warlord:~/test$ vi b.txt 
+warlord@Warlord:~/test$ vi b.txt 
+warlord@Warlord:~/test$ cd ..
+warlord@Warlord:~$ cat a.txt
+cat: a.txt: No such file or directory
+warlord@Warlord:~$ cd test/
+warlord@Warlord:~/test$ cat 
+a.txt  b.txt  
+warlord@Warlord:~/test$ cat a.txt 
+a for apple 
+b for ball 
+
+c for cat 
+ 
+warlord@Warlord:~/test$ cd ..
+warlord@Warlord:~$ mkdir test2/test2a
+mkdir: cannot create directory ‘test2/test2a’: No such file or directory
+warlord@Warlord:~$ mkdir test2
+warlord@Warlord:~$ cd test2
+warlord@Warlord:~/test2$ mkdir innertest
+warlord@Warlord:~/test2$ cd ..
+warlord@Warlord:~$ mv test/b.txt test2/innertest/
+warlord@Warlord:~$ 
+
+
+
+
+
+
+
+
+
+
+warlord@Warlord:~$ cd test2
+warlord@Warlord:~/test2$ cd innertest/
+warlord@Warlord:~/test2/innertest$ ls
+b.txt
+warlord@Warlord:~/test2/innertest$ cat b.txt 
+ this is b.txt from test
+warlord@Warlord:~/test2/innertest$ cd ..
+warlord@Warlord:~/test2$ mkdir just
+warlord@Warlord:~/test2$ mv just innertest/
+warlord@Warlord:~/test2$ ls
+innertest
+warlord@Warlord:~/test2$ cd innertest/
+warlord@Warlord:~/test2/innertest$ ls
+b.txt  just
+warlord@Warlord:~/test2/innertest$ cp b.txt just/
+warlord@Warlord:~/test2/innertest$ mkdir hi
+warlord@Warlord:~/test2/innertest$ cp b.txt hi/
+warlord@Warlord:~/test2/innertest$ cd hi/
+warlord@Warlord:~/test2/innertest/hi$ ls
+b.txt
+warlord@Warlord:~/test2/innertest/hi$ cd ..
+warlord@Warlord:~/test2/innertest$ cp hi just/
+cp: -r not specified; omitting directory 'hi'
+warlord@Warlord:~/test2/innertest$ cp -r hi just/
+warlord@Warlord:~/test2/innertest$ cd just/
+warlord@Warlord:~/test2/innertest/just$ ls
+b.txt  hi
+warlord@Warlord:~/test2/innertest/just$ cd hi/
+warlord@Warlord:~/test2/innertest/just/hi$ ls
+b.txt
+warlord@Warlord:~/test2/innertest/just/hi$ cat b.txt 
+ this is b.txt from test
+warlord@Warlord:~/test2/innertest/just/hi$ cd ../..
+warlord@Warlord:~/test2/innertest$ ls
+b.txt  hi  just
+warlord@Warlord:~/test2/innertest$ touch terminal.txt
+warlord@Warlord:~/test2/innertest$ ls
+b.txt  hi  just  terminal.txt
+
+
+
+
+warlord@Warlord:~$ node
+Welcome to Node.js v20.11.0.
+Type ".help" for more information.
+> let a=3; 
+undefined
+> console.log(a)
+3
+undefined
+> 
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+> 
+warlord@Warlord:~$ ls
+assignments  dev        Downloads  Pictures  snap       test   Videos
+Desktop      Documents  Music      Public    Templates  test2
+warlord@Warlord:~$ cd test
+warlord@Warlord:~/test$ ls
+a.txt
+warlord@Warlord:~/test$ cd ..
+warlord@Warlord:~$ cd test2
+warlord@Warlord:~/test2$ ls
+innertest
+warlord@Warlord:~/test2$ cd innertest/
+warlord@Warlord:~/test2/innertest$ ls
+b.txt  hi  just  terminal.txt
+warlord@Warlord:~/test2/innertest$ cat b.txt 
+ this is b.txt from test
+warlord@Warlord:~/test2/innertest$ vi b.txt 
+warlord@Warlord:~/test2/innertest$ cat b.txt 
+console.log("hii theree !!");
+warlord@Warlord:~/test2/innertest$ ls
+b.txt  hi  just  terminal.txt
+warlord@Warlord:~/test2/innertest$ node b.txt 
+hii theree !!
+warlord@Warlord:~/test2/innertest$ node let you compile js code 
