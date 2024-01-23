@@ -1,0 +1,153 @@
+  418  ls
+  419  pwd
+  420  cd abc
+  421  mkdir test
+  422  touch a.txt
+  423  ls
+  424  rm a.txt 
+  425  ls
+  426  cd test/
+  427  ls
+  428  vi a.txt
+  429  ls
+  430  vi a.txt
+  431  ls
+  432  touct b.txt
+  433  touch b.txt
+  434  vi a.txt 
+  435  ls
+  436  vi b.txt 
+  437  cd ..
+  438  cat a.txt
+  439  cd test/
+  440  cat a.txt 
+  441  cd ..
+  442  mkdir test2/test2a
+  443  mkdir test2
+  444  cd test2
+  445  mkdir innertest
+  446  cd ..
+  447  mv test/b.txt test2/innertest/
+  448  cd test2
+  449  cd innertest/
+  450  ls
+  451  cat b.txt 
+  452  cd ..
+  453  mkdir just
+  454  mv just innertest/
+  455  ls
+  456  cd innertest/
+  457  ls
+  458  cp b.txt just/
+  459  mkdir hi
+  460  cp b.txt hi/
+  461  cd hi/
+  462  ls
+  463  cd ..
+  464  cp hi just/
+  465  cp -r hi just/
+  466  cd just/
+  467  ls
+  468  cd hi/
+  469  ls
+  470  cat b.txt 
+  471  cd ../..
+  472  ls
+  473  touch terminal.txt
+  474  ls
+  475  node
+  476  nvm
+  477  clear
+  478  node
+  479  ls
+  480  cd test
+  481  ls
+  482  cd ..
+  483  cd test2
+  484  ls
+  485  cd innertest/
+  486  ls
+  487  cat b.txt 
+  488  vi b.txt 
+  489  cat b.txt 
+  490  ls
+  491  node b.txt 
+  492  node let you compile js code 
+  493  npm
+  494  ls
+  495  rmdir test
+  496  rmdir -r test
+  497  touch bash
+  498  vi bash 
+  499  ls
+  500  ls -a
+  501  ls -l
+  502  mkdir abc
+  503  ls -l
+  504  ls -t
+  505  ls 
+  506  ls -ls
+  507  ls -la
+  508  extit
+  509  exit
+  510  cd 2.
+  511  cd 2.1
+  512  ls
+  513  ls -l
+  514  ls -l *.js
+  515  cd .. && cd 2.4
+  516  ls
+  517  ls -l 
+  518  ls -l abc/
+  519  touch newf.txt
+  520  ls -l
+  521  chmod u+x newf.txt 
+  522  ls -l 
+  523  touch fil.txt
+  524  ls -l
+  525  chmod g+x fil.txt 
+  526  ls -l
+  527  chmod 441 newf.txt 
+  528  ls -l
+  529  chmod 666 newf.txt 
+  530  ls -l
+  531  echo "heiii afajsf"
+  532  echo $PATH
+  533  touch kubernetes.txt
+  534  wc kubernetes.txt 
+  535  grep "the" kubernetes.txt 
+  536  grep -c "the" kubernetes.txt 
+  537  grep -hi "the" kubernetes.txt 
+  538  grep "the" kubernetes.txt 
+  539  clear
+  540  node
+  541  node -v
+  542  nano sudoers
+  543  history
+  544  nvm -v
+  545  nvm
+  546  ls
+  547  curl 
+  548  curl -o- https://raw.githubusercontent.com/nvm-sh/v0.39.1/install.sh
+  549  install curl
+  550  install -h
+  551  install --hlep
+  552  install --help
+  553  apt install curl
+  554  sudo apt install curl
+  555  su
+  556  sudo apt install curl
+  557  curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+  558  nvm -v
+  559  nvm
+  560  ls
+  561  cd .nvm/
+  562  ls
+  563  cd ..
+  564  ls -l
+  565  ls -a
+  566  vi .bashrc 
+  567  nano .bashrc 
+  568  source .bashrc 
+  569  nvm -v
+  570  nvm install node
