@@ -1,0 +1,14 @@
+bash is a command line interpreted language with the help of which we can give command/ instruction to the OS  
+
+shell's task is to understand the prompt which we give in terminal and is executed by the kernal
+
+
+
+=> Appending nvm source string to /home/warlord/.bashrc
+=> Appending bash_completion source string to /home/warlord/.bashrc
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
