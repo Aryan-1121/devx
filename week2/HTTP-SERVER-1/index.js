@@ -7,6 +7,7 @@ const port =3000;
 
 
 const app = express();
+app.use(bodyParser.json());
 
 
 
@@ -29,7 +30,7 @@ app.get("/route-handler", (req, res)=>{
 
 
 app.post("/conversation",(req, res)=>{
-    res.send("<b> Heyy there how are you 1!1");
+    res.send("<b> Heyy there how are you 1!1 </b>");
 })
 
 
@@ -127,7 +128,7 @@ app.post("/query-param",(req, res)=>{
 
 
 
-// if you want to see your app hosted on localhost on soome other device on same wifi network then just use ip:{port no.}       eg- . -> 196.168.5.7:3000
+// if you want to see your app hosted on localhost on soome other device on same wifi network then just use wifi ip:{port no.}       eg- . -> 196.168.5.7:3000
 
 
 
