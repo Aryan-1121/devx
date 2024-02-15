@@ -48,7 +48,7 @@ let requestHits = 1;
 //  we can use middlewares to check how many hits we got on our server 
 function countRequestHitsMiddleware(req, res, next){
     console.log(`no. of hits to server : ${requestHits++}`);
-    next();
+    next();                     // compalsary otherwise code will not reach to next function and will gets hung here 
     
 }
 
@@ -82,14 +82,41 @@ function kidneyMiddleware(req, res, next){
 
 
 
+// //      mainnn logic
+
+// app.get("/health-checkup",countRequestHitsMiddleware, authenticationMiddleware, function(req, res){
+//     //  do some logic here 
+//     res.send("everything's fine !1");
+// });
+
+// app.get("/kidney-check",countRequestHitsMiddleware, authenticationMiddleware, kidneyMiddleware, (req, res)=>{
+//     //  do some kidney logic here 
+
+//     res.send("your kidney is fine !!1")
+// });
+
+// //      heart check doesn't have to do anything with kidney so we will not use  kidneyMiddleware here 
+
+// app.get("/heart-check", countRequestHitsMiddleware, authenticationMiddleware, (req, res)=>{
+//     res.send("your heart is healthy !1");
+// });
+
+
+
+
+
 //      mainnn logic
 
-app.get("/health-checkup",countRequestHitsMiddleware, authenticationMiddleware, kidneyMiddleware, function(req, res){
+
+app.use(countRequestHitsMiddleware);
+
+
+app.get("/health-checkup", authenticationMiddleware, function(req, res){
     //  do some logic here 
     res.send("everything's fine !1");
 });
 
-app.get("/kidney-check",countRequestHitsMiddleware, authenticationMiddleware, kidneyMiddleware, (req, res)=>{
+app.get("/kidney-check", authenticationMiddleware, kidneyMiddleware, (req, res)=>{
     //  do some kidney logic here 
 
     res.send("your kidney is fine !!1")
@@ -97,10 +124,9 @@ app.get("/kidney-check",countRequestHitsMiddleware, authenticationMiddleware, ki
 
 //      heart check doesn't have to do anything with kidney so we will not use  kidneyMiddleware here 
 
-app.get("/heart-check", countRequestHitsMiddleware, authenticationMiddleware, (req, res)=>{
+app.get("/heart-check", authenticationMiddleware, (req, res)=>{
     res.send("your heart is healthy !1");
 });
-
 
 
 
