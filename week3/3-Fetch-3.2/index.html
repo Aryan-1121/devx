@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+<body>
+    <script>
+        // function getAnimalData(){
+        //     // const response = fetch("https://fakerapi.it/api/v1/persons")        // will return pending promise so we need to use .then 
+
+        //     fetch("https://fakerapi.it/api/v1/persons")
+        //         .then(function(response){
+        //             // response.json() also returns a promise 
+        //             response.json()
+        //                 .then(function(finalData){
+        //                     console.log(finalData);
+        //                 })
+        //         })
+        //     console.log(response)
+        // }
+
+        //  same thing using asyn await 
+
+        //   MUCH CLEANER !!1
+
+        async function getAnimalData(){
+            const response = await fetch("https://fakerapi.it/api/v1/persons");
+
+            const finalData = await response.json();
+            console.log(finalData);
+        }
+
+
+
+    </script>
+    <button onclick="getAnimalData()"> Get user Data</button>
+    
+</body>
+</html>
