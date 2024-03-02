@@ -44,21 +44,34 @@ function userExists(username, password){
 
 }    
 
+function getName(username, pw){
+    for(let i =0 ; i<ALL_USERS.length ; i++){
+        if(ALL_USERS[i].username == username && ALL_USERS[i].pw == pw){
+            return ALL_USERS[i].name;
+        }
+
+    }
+
+}
 
 app.post("/signin",(req, res) =>{
 
     const username = req.body.username;
     const pw = req.body.password;
-
     if(!userExists(username, pw)){
+
         return res.status(403).json({
             msg: "user doesn't existi in our in memory db"
         });
     }
-
     // if user exists in our in memory db - then return a jwt 
+    const name = getName(username, pw);
 
-    var token = jwt.sign({username: username}, jwtPassword);
+    var token = jwt.sign(
+        {
+            username: username,
+            name : name
+        }, jwtPassword);
 
     return res.json({
         token
