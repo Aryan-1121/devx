@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <title>Document</title>
+    </head>
+    <script>
+
+        function calSum(){
+
+            const a = document.getElementById("firstIp").value;
+            const b = document.getElementById("secondIp").value;
+            console.log( a, b)
+            document.getElementById("finalSum").innerHTML = parseInt(a)+ parseInt(b);
+        }
+        
+
+    </script>
+
+    <body>
+
+<!-- 
+
+        <input id = "firstIp" type="number" placeholder="first no. "></input><br></br>
+        <input id = "secondIp" type="number " placeholder="second no. "></input><br></br>
+        <button onclick="calSum()"> calculate</button><br></br>
+        <div id = "finalSum"> final sum is = </div>
+
+         -->
+
+         <input id = "firstIp" type="number" placeholder="first no. "></input><br></br>
+         <input oninput="calSum()" id = "secondIp" type="number" placeholder="second no. "></input><br></br>
+         <!-- <button onclick="calSum()"> calculate</button><br></br> -->
+         <div id = "finalSum"> final sum is = </div>
+ 
+    </body>
+</html>
