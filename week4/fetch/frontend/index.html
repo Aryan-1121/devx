@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SUM</title>
+
+
+</head>
+<script>
+    async function getSum(){
+        const a = document.querySelector("#firstIp").value;
+        const b = document.getElementById("secondIp").value; 
+        console.log ( a, b)
+        const sum = await fetch("http://127.0.0.1:3000/sum?a=" + a + "&b=" +b );
+        const finalSum = await sum.text();
+
+        console.log("------"+finalSum);
+        document.querySelector("#finalSum").innerHTML =  finalSum ;
+    }
+
+
+</script>
+
+
+<body>
+
+
+    <input id = "firstIp" type="number" placeholder="first no. "></input><br></br>
+    <input id = "secondIp" type="number" placeholder="second no. "></input><br></br>
+    <button onclick="getSum()"> calculate</button><br></br>
+    <div id = "finalSum">  </div>
+
+</body>
+</html>
