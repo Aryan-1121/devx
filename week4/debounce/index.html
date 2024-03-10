@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <title>Document</title>
+    </head>
+    <script>
+
+        let timer ;
+        function dbouncedCalSum(){
+            // delay the call to calSum until debouncedSum heve not been called for 1sec
+            // and I've been called atleast once 
+            
+            clearTimeout(timer);// if there is any existing timer than clear it 
+            timer = setTimeout(function(){
+                calSum();
+
+            },1000);
+
+        }
+
+
+        function calSum(){
+            const a = document.getElementById("firstIp").value;
+            const b = document.getElementById("secondIp").value;
+            console.log( a, b)
+            document.getElementById("finalSum").innerHTML = parseInt(a)+ parseInt(b);
+        }
+        
+
+    </script>
+
+    <body>
+
+
+         <input oninput="dbouncedCalSum()" id = "firstIp" type="number" placeholder="first no. "></input><br></br>
+         <input oninput="dbouncedCalSum()" id = "secondIp" type="number" placeholder="second no. "></input><br></br>
+         <div id = "finalSum"> final sum is = </div>
+ 
+    </body>
+</html>
