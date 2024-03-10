@@ -1,0 +1,35 @@
+<html>
+
+    <script>
+        function addTodo(){
+            const title = document.getElementById("title").value; 
+            const description = document.getElementById("description").value; 
+
+//      UGLY WAY TO DO IT 
+
+            // const originalHtml = document.getElementById("container").innerHTML;
+            // document.getElementById("container").innerHTML = originalHtml + 
+            //     `<div>
+            //         <div>${title}</div>
+            //         <div>${description}</div>
+            //         <button> Mark Done</button>
+            //     </div> `
+
+
+            console.log(description, title)
+        }
+    </script>
+
+    <body>
+        <div>
+            <input id ="title" type="text" placeholder="Title">  <br></br>
+            <input id="description" type="text" placeholder="Description"> <br></br>
+
+            <button onclick="addTodo()">Add todo</button>   <br></br>
+            <div id="container"></div>
+        </div>
+    </body>
+
+
+
+</html>
