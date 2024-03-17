@@ -2,8 +2,6 @@
 //hook 
 import { useState } from "react";
 
-
-
 function App() {
   
   const [count, setCount] = useState(0);  
@@ -18,9 +16,7 @@ function App() {
   );
 }
 
-
-
-// COmponent
+// Component
 function CustomButton(props){
 
   function onClickHandler(){
@@ -32,7 +28,4 @@ function CustomButton(props){
     Counter {props.count}
   </button>
 }
-
-
-
 export default App;
