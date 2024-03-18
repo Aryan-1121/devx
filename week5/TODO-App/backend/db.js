@@ -12,9 +12,9 @@ mongoose.connect("mongodb+srv://admin:devxat2024@cluster0.6grydmw.mongodb.net/to
 
 const TodoShcema = mongoose.model('todo', 
 {
-    title: string, 
-    description: string,
-    completed: boolean
+    title: String, 
+    description: String,
+    completed: Boolean
 });
 
 

@@ -22,7 +22,7 @@ const createTodo = zod.object({
 });
 
 const updateTodo= zod.object({
-    id: string()
+    id: zod.string()
 })
 
 

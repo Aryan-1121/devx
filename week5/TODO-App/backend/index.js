@@ -21,7 +21,7 @@ app.post("/todo", async (req, res)=>{
     // put in mongo db 
     await todo.create({
         title: createPayload.title,
-        description: createPayload.description
+        description: createPayload.description,
         completed: false
     })
 
@@ -56,7 +56,7 @@ app.put("/complete", async(req,res)=>{
         });
     }
 
-    await todo.update({
+    await todo.updateOne({
         _id: req.body.id
     },{
         completed: true
@@ -64,9 +64,9 @@ app.put("/complete", async(req,res)=>{
     });
     res.json({
         msg: " Todo marked as done !!"
-    })
+    });
 
-})
+});
 
 
 
