@@ -139,6 +139,7 @@ function App() {
 // }
 
 //  react memo only renders when there's a change in  the component ->
+//  memo lets you skip re-rendering  a component when its props are unchanged
 
 const Header = React.memo(
   function Header({title}){
