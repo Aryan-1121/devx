@@ -49,51 +49,101 @@ import { useEffect, useState } from "react"
 // A Component that takes a todo id as input and fetches that todo from an endpoint and renders it 
 
 
-function App() {
+// function App() {
+
+//   return <div>
+//     <Todo id={2} />
+//   </div>
+
+
+// }
+
+
+
+// function Todo({ id }) {
+
+//   const [todo, setTodo] = useState([]);
+
+
+//   useEffect(() => {
+
+//     fetch("https://sum-server.100xdevs.com/todo?id="+ id)
+//       .then(async (res) => {
+//         const json = await res.json();
+//         setTodo(json.todo);
+//       })
+
+//   }, []);
+
+
+//   return <div>
+//     <h1>
+//       {todo.title}
+//     </h1>
+//       {todo.description}
+//   </div>
+// }
+
+
+
+
+
+
+
+function App(){
+
+  const [button, setbutton] = useState(1);
+
+
 
   return <div>
-    <Todo id={2} />
+    <button onClick={()=>{
+      setbutton(1);
+    }}>1</button>
+    <button onClick={()=>{
+      setbutton(2);
+    }}>2</button>
+    <button onClick={()=>{
+      setbutton(3);
+    }}>3</button>
+    
+    <button onClick={()=>{
+      setbutton(4);
+    }}>4</button>
+    <button onClick={()=>{
+      setbutton(5);
+    }}>5</button>
+
+    <Todo id={button} />
   </div>
-
-
 }
+
 
 
 
 function Todo({ id }) {
-
-  const [todo, setTodo] = useState([]);
-
-
-  useEffect(() => {
-
-    fetch("https://sum-server.100xdevs.com/todo?id="+ id)
-      .then(async (res) => {
-        const json = await res.json();
-        setTodo(json.todo);
-      })
-
-  }, []);
-
-
-  return <div>
-    <h1>
-      {todo.title}
-    </h1>
-      {todo.description}
-  </div>
-}
-
-
-
-
-
-
-
-
-
-
-
+console.log(id);
+    const [todo, setTodo] = useState([]);
+  
+  
+    useEffect(() => {
+  
+      fetch("https://sum-server.100xdevs.com/todo?id="+ id)
+        .then(async (res) => {
+          const json = await res.json();
+          setTodo(json.todo);
+        })
+  
+    }, [id]);
+  
+  
+    return <div>
+      <h1>
+        {todo.title}
+      </h1>
+        {todo.description}
+    </div>
+  }
 
 
 
