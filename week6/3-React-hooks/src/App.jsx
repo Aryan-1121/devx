@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { memo, useCallback, useEffect, useMemo, useState } from "react"
 
 
 // function App() {
@@ -150,7 +150,7 @@ import { useEffect, useMemo, useState } from "react"
 
 
 
-      //      USE MEMEO
+      //                      USE MEMEO  -> can br replaced using useEffect
 
     
 
@@ -185,35 +185,86 @@ import { useEffect, useMemo, useState } from "react"
 
 
 
+// function App(){
+//   const [counter, setCounter] = useState(0); 
+//   const [inputValue, setInputValue] = useState(1);
+
+//   let count = useMemo(()=>{
+//     let finalCount =0;
+//     for(let i =1; i<=inputValue; i++){
+//       finalCount+=i;
+//     }
+//     return finalCount;
+//   },[inputValue]) 
+
+//   return <div>
+//     <input onChange={(e)=>{
+//       setInputValue(e.target.value);
+//     }}
+//     placeholder="find sum from 1 to n "></input>
+//     <br />
+//     Sum fromo 1 to {inputValue} is {count}
+//     <br />
+
+
+// {/* when we click tis button it causes re-render that will make above code run too, even if above thing is not changed  */}
+//     <button onClick={()=>{
+//       setCounter(counter +1);
+//     }}>Counter({counter})</button>
+//   </div>
+
+//   }
+
+
+
+
+
+
+
+
+
+
+//                                    USE CALLBACK   -> need to memoize functions
+
+
+
+
 function App(){
   const [counter, setCounter] = useState(0); 
-  const [inputValue, setInputValue] = useState(1);
 
-  let count = useMemo(()=>{
-    let finalCount =0;
-    for(let i =1; i<=inputValue; i++){
-      finalCount+=i;
-    }
-    return finalCount;
-  },[inputValue]) 
+  // const inputFn = ()=>{
+  //   console.log('hi from inpunt fn ');
+  // }
+  // the above snippet will make ButtonComponent re-render even if its in memo, bcs js cant tell differnce b/w 2 fn/objcts so will mark as new hence re-render occur          -> to avoid this we use useCallback with some dependency array
+
+  const inputFn = useCallback(()=>{
+    console.log('hi from inpunt fn ');
+  },[]);
+
 
   return <div>
-    <input onChange={(e)=>{
-      setInputValue(e.target.value);
-    }}
-    placeholder="find sum from 1 to n "></input>
-    <br />
-    Sum fromo 1 to {inputValue} is {count}
-    <br />
+    <ButtonComponent inputFn={inputFn} />
 
-
-{/* when we click tis button it causes re-render that will make above code run too, even if above thing is not changed  */}
     <button onClick={()=>{
       setCounter(counter +1);
-    }}>Counter({counter})</button>
+    }}> counter {counter}</button>
+
+    
   </div>
 
-  }
+}
+
+const ButtonComponent = memo(({inputFn})=>{
+  console.log('child re-rederd');
+  return <div>
+    {/* <button> Button clicked !!</button> */}
+  </div>
+})
+
+
+
+
+
 
 
 
