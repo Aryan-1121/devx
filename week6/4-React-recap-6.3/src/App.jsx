@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 
 // PROBLEM :    any time a component renders its all children gets render doesn't matter weather the child's prop gets updated or not / or even when child doesn't uses any props 
@@ -34,23 +34,17 @@ useEffect(function () {
 }, []);
 
 
-  const cryptoReturns = function(){
+//  SOLUTION :
+//      useCallback is not about minimizing the amount of code that is going to run 
+//    useCallback is about not rendering a child component, if the function hasn't/ doesn't need to change across renders 
+
+  const cryptoReturns =useCallback( function(){
     return cryptoData1.returns + cryptoData2.returns;
-  }
+  }, [cryptoData1, cryptoData2]);
 
    return (
     <div>
       <CryptoCalculator cryptoReturns= { cryptoReturns } />
-
-
-
-
-      {/* <DummyWoProps />         */}
-
-      {/* PROBLEM : even the DummyWoProps component re-renders after 4 sec when bankData re-renders which has nothing to do with this Component (DummyWoProps is independent of any props) */}
-
-      {/* SOLUTION : memo from react (it skips the re-render when props of a child doesn't chage) */}
-
     </div>
   )
 }
@@ -63,22 +57,6 @@ const CryptoCalculator = memo(function({ cryptoReturns}){
     crypto returns is : {cryptoReturns()}
   </div>
 })
-
-
-
-
-
-// // function DummyWoProps(){
-// //   console.log('dummy child w/o any props');
-// // }
-// const DummyWoProps = memo(()=>{
-//   // since we are using memo from react this will skip the re-render when its parent re-renders and its props doesn't change (in this case it doesn't have any props => no prop changed hence it will skip all re-renders when its parent gets re-render )
-//   console.log('dummy child w/o any props');
-// })
-
-
-
-
 
 
 export default App
