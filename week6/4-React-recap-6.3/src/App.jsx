@@ -1,4 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
+
+
+// PROBLEM :    any time a component renders its all children gets render doesn't matter weather the child's prop gets updated or not / or even when child doesn't uses any props 
+
 
 function App() {
 
@@ -31,23 +35,44 @@ useEffect(function () {
 
 
 
-//    this will only gets re-computed iff either of  cryptoData1 or cryptoData2 changes
-  const cryptoReturns = useMemo(()=>{
-    // this will render only twice -> when cryptoData1 &  cryptoData2 changes 
+  const cryptoReturns = (()=>{
     console.log('render for cryptoReturns ');
     return cryptoData1.returns + cryptoData2.returns;
-  }, [cryptoData1, cryptoData2]);
-
-
-
-  const incomeTax = (bankData.income + cryptoReturns) * 0.3;
+  });
 
   return (
     <div>
-      your Income Tax returns are  : {incomeTax}
+      parent rendering
+      {/* <CryptoCalculator cryptoReturns= { cryptoReturns } /> */}
+      <DummyWoProps />        
+
+      {/* PROBLEM : even the DummyWoProps component re-renders after 4 sec when bankData re-renders which has nothing to do with this Component (DummyWoProps is independent of any props) */}
+
+      {/* SOLUTION : memo from react (it skips the re-render when props of a child doesn't chage) */}
 
     </div>
   )
 }
+
+
+const CryptoCalculator = function({ cryptoReturns}){
+  console.log('child with props (not changing)');
+  return <div>
+    crypto returns is : {cryptoReturns}
+  </div>
+}
+
+// function DummyWoProps(){
+//   console.log('dummy child w/o any props');
+// }
+const DummyWoProps = memo(()=>{
+  // since we are using memo from react this will skip the re-render when its parent re-renders and its props doesn't change (in this case it doesn't have any props => no prop changed hence it will skip all re-renders when its parent gets re-render )
+  console.log('dummy child w/o any props');
+})
+
+
+
+
+
 
 export default App
