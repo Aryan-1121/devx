@@ -2,34 +2,36 @@ import { useEffect, useState } from 'react'
 
 function App() {
 
-  const [cryptoData, setCryptoData] = useState({});
+  const [cryptoData1, setCryptoData1] = useState({});
+  const [cryptoData2, setCryptoData2] = useState({});
+  
   const [bankData, setBankData] = useState({});
 
 
-  useEffect(function () {
-    setTimeout(() => {
-      console.log('re-render form bank Data');
-      setBankData({ income: 200 });
-    }, 3000);
 
-  }, []);
 
-  // empty dependency array means render only once in the starting 
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log('re-render form Crypto Data');
-      setCryptoData({
-        returns: 100
-      });
-    }, 1000);
-
-  }, [])
+    setCryptoData1({ returns: 100 });
+}, [])
 
 
-  // we could  have used single useEffect instead of 2 by puting both logic inside 1 useEffect only 
+useEffect(() => {
+  setCryptoData2({ returns: 200 });
+}, [])
 
-  const incomeTax = (bankData.income + cryptoData.returns) * 0.3;
+
+useEffect(function () {
+  setTimeout(() => {
+    console.log('re-render form bank Data');
+    setBankData({ income: 200 });
+  }, 4000);
+
+}, []);
+
+
+  const cryptoReturns = cryptoData1.returns + cryptoData2.returns;    // PROBLEM  : this should not re-run when incomeTax is being calculated bcs this value didn't changed  
+  const incomeTax = (bankData.income + cryptoReturns) * 0.3;
 
   return (
     <div>
