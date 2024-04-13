@@ -27,24 +27,25 @@ useEffect(() => {
 
 useEffect(function () {
   setTimeout(() => {
-    console.log('re-render form bank Data');
+    console.log('re-render form bank Data after 4-sec');
     setBankData({ income: 200 });
   }, 4000);
 
 }, []);
 
 
-
-  const cryptoReturns = (()=>{
-    console.log('render for cryptoReturns ');
+  const cryptoReturns = function(){
     return cryptoData1.returns + cryptoData2.returns;
-  });
+  }
 
-  return (
+   return (
     <div>
-      parent rendering
-      {/* <CryptoCalculator cryptoReturns= { cryptoReturns } /> */}
-      <DummyWoProps />        
+      <CryptoCalculator cryptoReturns= { cryptoReturns } />
+
+
+
+
+      {/* <DummyWoProps />         */}
 
       {/* PROBLEM : even the DummyWoProps component re-renders after 4 sec when bankData re-renders which has nothing to do with this Component (DummyWoProps is independent of any props) */}
 
@@ -54,21 +55,26 @@ useEffect(function () {
   )
 }
 
+// PROBLEM : if I try using memo from react where a component is taking a function as a prop then it will not work as expected bcs reference of existing function in virtual DOM and new Dom when re-render occur from parent is different, hence it will mark both things as different eveen if the content is same within -> this sohuld not happen 
 
-const CryptoCalculator = function({ cryptoReturns}){
-  console.log('child with props (not changing)');
+const CryptoCalculator = memo(function({ cryptoReturns}){
+  console.log('child re-renders ( props not changing)');
   return <div>
-    crypto returns is : {cryptoReturns}
+    crypto returns is : {cryptoReturns()}
   </div>
-}
-
-// function DummyWoProps(){
-//   console.log('dummy child w/o any props');
-// }
-const DummyWoProps = memo(()=>{
-  // since we are using memo from react this will skip the re-render when its parent re-renders and its props doesn't change (in this case it doesn't have any props => no prop changed hence it will skip all re-renders when its parent gets re-render )
-  console.log('dummy child w/o any props');
 })
+
+
+
+
+
+// // function DummyWoProps(){
+// //   console.log('dummy child w/o any props');
+// // }
+// const DummyWoProps = memo(()=>{
+//   // since we are using memo from react this will skip the re-render when its parent re-renders and its props doesn't change (in this case it doesn't have any props => no prop changed hence it will skip all re-renders when its parent gets re-render )
+//   console.log('dummy child w/o any props');
+// })
 
 
 
