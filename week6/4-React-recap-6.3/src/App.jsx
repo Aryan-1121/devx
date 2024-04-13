@@ -1,39 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function App() {
 
-const [cryptoData, setCryptoData] = useState({});
-const [bankData, setBankData] = useState({});
-
-// fetch('https://google.com', async(res) =>{
-//   const json = await res.json();
-//   // setBankData(json);
-//   // eg. let json data be -> {income : 200}
-//   setBankData({income : 200})
-// });
-
-// simulating fectch req. to a setTimeout otherwise since url is incorrect it will give error
-
-setTimeout( ()=>{
-  console.log('re-render form bank Data');
-
-  setBankData({income : 200});
-}, 3000);
-
-setTimeout(()=>{
-  console.log('re-render form Crypto Data');
-
-  setCryptoData({
-    returns: 100
-  });
-}, 1000);
-
-// PROBLEM   ->   each time setBankData and setCrptoData gets updated a whole App re-render occur then again these 2 gets updated then again whole app re-render and this goes on infinitely -> TO SOLVE THIS ISSUE WE HAVE {USEeFFECT}
-
-const incomeTax = (bankData.income + cryptoData.returns) * 0.3 ; 
+  const [cryptoData, setCryptoData] = useState({});
+  const [bankData, setBankData] = useState({});
 
 
+  useEffect(function () {
+    setTimeout(() => {
+      console.log('re-render form bank Data');
+      setBankData({ income: 200 });
+    }, 3000);
 
+  }, []);
+
+  // empty dependency array means render only once in the starting 
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('re-render form Crypto Data');
+      setCryptoData({
+        returns: 100
+      });
+    }, 1000);
+
+  }, [])
+
+
+  // we could  have used single useEffect instead of 2 by puting both logic inside 1 useEffect only 
+
+  const incomeTax = (bankData.income + cryptoData.returns) * 0.3;
 
   return (
     <div>
