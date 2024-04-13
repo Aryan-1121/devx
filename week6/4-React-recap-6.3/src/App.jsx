@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 function App() {
 
@@ -30,7 +30,16 @@ useEffect(function () {
 }, []);
 
 
-  const cryptoReturns = cryptoData1.returns + cryptoData2.returns;    // PROBLEM  : this should not re-run when incomeTax is being calculated bcs this value didn't changed  
+
+//    this will only gets re-computed iff either of  cryptoData1 or cryptoData2 changes
+  const cryptoReturns = useMemo(()=>{
+    // this will render only twice -> when cryptoData1 &  cryptoData2 changes 
+    console.log('render for cryptoReturns ');
+    return cryptoData1.returns + cryptoData2.returns;
+  }, [cryptoData1, cryptoData2]);
+
+
+
   const incomeTax = (bankData.income + cryptoReturns) * 0.3;
 
   return (
