@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import React, { Suspense, useState, lazy } from 'react'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
-import { Dashboard } from './components/Dashboard'
-import { Landing } from './components/Landing'
+// import { Landing } from './components/Landing'
+
+// import { Dashboard } from './components/Dashboard'
+const Dashboard = lazy(() => import('./components/Dashboard'))
+const Landing = lazy(() => import('./components/Landing'))
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,8 +33,9 @@ function App() {
       <BrowserRouter>
         <AppBar />
         <Routes>
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/' element={<Landing />} />
+          {/* we use Suspense fallback to tell browser what to show until the content in lazily loading (fetching) otherwise react wont know what to show while loading and will break  */}
+          <Route path='/dashboard' element={<Suspense fallback='Loading...'><Dashboard /> </Suspense>} />
+          <Route path='/' element={<Suspense fallback='LOADING $$$$' >  <Landing />  </Suspense>} />
         </Routes>
       </BrowserRouter>
     </div>
