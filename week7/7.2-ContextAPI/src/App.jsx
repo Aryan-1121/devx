@@ -1,6 +1,6 @@
 
 import { countAtom } from './store/atoms/count';
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilState,useSetRecoilState, useRecoilValue } from "recoil";
 // =>  CONTEXT API  does not make rendering more perfomant  => NOOOOOOOOO
 //  => IT JUST MAKE CODE LOOK CLEANER (THAT IS GET RID OF PROP DRILLING)
 
@@ -40,16 +40,18 @@ function CountRenderer() {
 }
 
 function Buttons() {
-  // this component needs both thing count and setCOunt  => useRecoilState
-  const [count, setCount] = useRecoilState(countAtom);  
+  //actually this component doesn't need both count and setCount, it only needs to use setCount, and for count we can use function wala logic
+  // const [count, setCount] = useRecoilState(countAtom);  
 
+  // earlier Button component was also re-rendering bcs it was using count state var. but no more
+  const setCount = useSetRecoilState(countAtom);
   return <div>
     <button onClick={() => {
-      setCount(count + 1)
+      setCount(count => count + 1)
     }}> increase </button>
 
     <button onClick={() => {
-      setCount(count - 1)
+      setCount(count => count - 1)
     }}> decrease  </button>  </div>
 }
 
