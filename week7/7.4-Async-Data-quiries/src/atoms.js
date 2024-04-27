@@ -5,10 +5,11 @@ import { atom, selector } from 'recoil';
 export const notifications = atom({
     key : 'networkAtom',
     default: {
-        network:Math.floor(Math.random() * 250),
-        jobs:4,
-        messages: 7,
-        notifications:45
+        // network:Math.floor(Math.random() * 250),
+        network:0,
+        jobs:0,
+        messages: 0,
+        notifications:0
     }
 });
 
