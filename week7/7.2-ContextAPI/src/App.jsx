@@ -1,5 +1,5 @@
 
-import { countAtom } from './store/atoms/count';
+import { countAtom, evenSelector } from './store/atoms/count';
 import { RecoilRoot, useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
 // =>  CONTEXT API  does not make rendering more perfomant  => NOOOOOOOOO
 //  => IT JUST MAKE CODE LOOK CLEANER (THAT IS GET RID OF PROP DRILLING)
@@ -37,13 +37,15 @@ function CountRenderer() {
     <b>
       {count}
     </b>
-    {(count % 2 === 0 ) ? <EvenRenderer /> :<div>the no. is odd </div>}
+    <EvenRenderer />
   </div>
 }
 
 function EvenRenderer(){
+  const isEven = useRecoilValue(evenSelector);
   return <div>
-    the no. is even
+    {isEven ? 'the no. is even ': 'the no. is odd ' }
+ 
   </div>
 }
 
