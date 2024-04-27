@@ -1,6 +1,6 @@
 
 import { countAtom } from './store/atoms/count';
-import { RecoilRoot, useRecoilState,useSetRecoilState, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
 // =>  CONTEXT API  does not make rendering more perfomant  => NOOOOOOOOO
 //  => IT JUST MAKE CODE LOOK CLEANER (THAT IS GET RID OF PROP DRILLING)
 
@@ -14,7 +14,6 @@ function App() {
     <div>
       {/* need to wrap everything which uses recoil stuff(state vars defined in atom) bbetween RecoilRoot */}
       <RecoilRoot>
-
         <Count />
       </RecoilRoot>
     </div>
@@ -25,17 +24,26 @@ function App() {
 function Count() {
   console.log('couter got re-render');
   return <div>
-    <CountRenderer  />
-    <Buttons  />
+    <CountRenderer />
+    <Buttons />
 
   </div>
 }
 
 function CountRenderer() {
-  // this component just need to use the value of count and not update so we will use useRecoilValue hook 
   const count = useRecoilValue(countAtom);
+  // this component just need to use the value of count and not update so we will use useRecoilValue hook 
   return <div>
-    {count}
+    <b>
+      {count}
+    </b>
+    {(count % 2 === 0 ) ? <EvenRenderer /> :<div>the no. is odd </div>}
+  </div>
+}
+
+function EvenRenderer(){
+  return <div>
+    the no. is even
   </div>
 }
 
