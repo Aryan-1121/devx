@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { RecoilRoot, useRecoilValue } from 'recoil'
-import { networkAtom } from './atoms'
+import { jobsAtom, messagingAtom, networkAtom, notificationAtom } from './atoms'
 
 // I could have done same thing using useState
 function App() {
@@ -12,16 +11,21 @@ function App() {
 
 function MainApp() {
   const networkCount = useRecoilValue(networkAtom);
+  const jobsCount = useRecoilValue(jobsAtom);
+  const messageCount = useRecoilValue(messagingAtom)
+  const notificationCount = useRecoilValue(notificationAtom);
+
+
 
   return (
     <div>
       <button> Home</button>
 
 
-      <button> My Network({networkCount >= 100 ? '99+' : networkCount}) </button>
-      <button> Jobs</button>
-      <button> Messaging</button>
-      <button> Notification</button>
+      <button> My Network ( {networkCount >= 100 ? '99+' : networkCount} )</button>
+      <button> Jobs ( {jobsCount} )</button>
+      <button> Messaging ( {messageCount} )</button>
+      <button> Notification ( {notificationCount} )</button>
 
 
       <button> Me </button>
