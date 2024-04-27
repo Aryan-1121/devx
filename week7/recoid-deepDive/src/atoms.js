@@ -27,5 +27,5 @@ export const messagingAtom = atom({
 
 
 
-
+            //  SELCTOR -> replaced the use of useMemo to minimize re-render (don't re-render when the state variable in dependency array is not changed )
 
