@@ -1,8 +1,6 @@
-import { RecoilRoot, useRecoilValue } from 'recoil'
-import { jobsAtom, messagingAtom, networkAtom, notificationAtom, totalNotificationSelector } from './atoms'
-import { useMemo } from 'react';
-
-// I could have done same thing using useState   => replaced by atoms
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
+import {notifications, totalNotificationSelector } from './atoms'
+import { useEffect } from 'react';
 
 function App() {
   return <RecoilRoot>
@@ -12,28 +10,21 @@ function App() {
 }
 
 function MainApp() {
-  const networkCount = useRecoilValue(networkAtom);
-  const jobsCount = useRecoilValue(jobsAtom);
-  const messageCount = useRecoilValue(messagingAtom)
-  const notificationCount = useRecoilValue(notificationAtom);
-
-  // // useMemo will be replaced with selector
-  // const totalNotificationCount = useMemo( ()=>{
-  //   return networkCount + jobsCount + messageCount + notificationCount;
-  // }, networkCount, jobsCount, messageCount, notificationCount)
+  const [allNotifications, setAllNotifications] = useRecoilState(notifications);
 
   const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
+ 
 
   return (
     <div>
       <button> Home</button>
 
 
-      <button> My Network ( {networkCount >= 100 ? '99+' : networkCount} )</button>
-      <button> Jobs ( {jobsCount} )</button>
-      <button> Messaging ( {messageCount} )</button>
-      <button> Notification ( {notificationCount} )</button>
+      <button> My Network ( {allNotifications.network >= 100 ? '99+' : allNotifications.network } )</button>
+      <button> Jobs ( {allNotifications.jobs} )</button>
+      <button> Messaging ( {allNotifications.messages} )</button>
+      <button> Notification ( {allNotifications.notifications} )</button>
 
 
       <button> Me ({totalNotificationCount})</button>

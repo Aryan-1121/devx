@@ -2,44 +2,24 @@
 import { atom, selector } from 'recoil';
 
 
-export const networkAtom = atom({
+export const notifications = atom({
     key : 'networkAtom',
-    default: 103
+    default: {
+        network:Math.floor(Math.random() * 250),
+        jobs:4,
+        messages: 7,
+        notifications:45
+    }
 });
 
 
-export const jobsAtom = atom({
-    key : 'jobsAtom',
-    default: 0
-});
-
-
-export const notificationAtom = atom({
-    key : 'notificationAtom',
-    default: 0
-});
-
-
-export const messagingAtom = atom({
-    key : 'messagingAtom',
-    default: 6
-});
-
-
-
-            //  SELCTOR -> replaced the use of useMemo to minimize re-render (don't re-render when the state variable in dependency array is not changed )
-
-            // SELECTOR IS DERIVED DIRECTLY FROM OTHER ATOMS (no wajood of itself)
 
 export const totalNotificationSelector = selector({
     key:'totalNotificationSelector',
     get: ({get}) =>{
-        const networkAtomCount = get(networkAtom);
-        const jobsAtomCount = get(jobsAtom);
-        const notificationAtomCount = get(notificationAtom);
-        const messagingAtomCount = get(messagingAtom);
+        const allNotifications = get(notifications);
 
-        return  networkAtomCount+  jobsAtomCount+ notificationAtomCount +  messagingAtomCount ;
+        return  allNotifications.network+  allNotifications.jobs+ allNotifications.messages +  allNotifications .notifications;
     } 
 })
 
