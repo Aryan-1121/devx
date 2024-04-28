@@ -15,20 +15,22 @@ function MainApp() {
 
   const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
-  useEffect(()=>{
-    axios.get('https://fakerapi.it/api/v1/credit_cards?_quantity=1')
-      .then(res =>{
-        const fetchedNo = (parseInt(res.data.data[0].number));
-        const valuesToBeSet = {
-           network : fetchedNo % Math.floor(Math.random() * 150) ,
-           jobs : fetchedNo % Math.floor(Math.random() * 50) ,
-           messages : fetchedNo % Math.floor(Math.random() * 15) ,
-           notifications : fetchedNo % Math.floor(Math.random() * 100) ,
+  // each time the app refreshes 1st the default value of those 4 fields will be populated from Atom (0,0,0,0) and then after 100ms or so it will fetch from useEffect logic.
+  // empty dependency array makes sure it will gets run the very 1st time the app refreshes 
+  // useEffect(()=>{
+  //   axios.get('https://fakerapi.it/api/v1/credit_cards?_quantity=1')
+  //     .then(res =>{
+  //       const fetchedNo = (parseInt(res.data.data[0].number));
+  //       const valuesToBeSet = {
+  //          network : fetchedNo % Math.floor(Math.random() * 250) ,
+  //          jobs : fetchedNo % Math.floor(Math.random() * 50) ,
+  //          messages : fetchedNo % Math.floor(Math.random() * 15) ,
+  //          notifications : fetchedNo % Math.floor(Math.random() * 100) ,
 
-        }
-        setAllNotifications(valuesToBeSet);
-      })
-  },[])
+  //       }
+  //       setAllNotifications(valuesToBeSet);
+  //     })
+  // },[])
 
  
 
