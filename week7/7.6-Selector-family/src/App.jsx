@@ -11,6 +11,11 @@ function App() {
   return <RecoilRoot>
     <Todo id={1} />
     <Todo id={3} />
+    <Todo id={3} />
+    <Todo id={3} />
+    <Todo id={3} />
+    <Todo id={3} />
+    {/* even though we are using Todo with id=3 multiple times still the BE will be  hitted only once and then value will be cached for it and re-used when same thing is again needed to be fetched  */}
   </RecoilRoot>
 }
 
