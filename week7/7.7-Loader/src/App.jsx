@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { RecoilRoot, useRecoilValueLoadable } from 'recoil';
 import { todosAtomFamily } from './atoms';
@@ -18,22 +15,21 @@ function App() {
   </RecoilRoot>
 }
 
-
-
 function Todo({ id }) {
   // exactly similar to this we have useRecoilSetValueLoadabel and useRecoilStateLoadable
   const currentTodo = useRecoilValueLoadable(todosAtomFamily(id));
   // this currentTodo will have 2 important things 1st-> CONTENTS - actual data
   // 2nd -> STATE -> (loading/ hasValue / hasError)
   // so whenever we have currentTodo's state as 'loading' then we will log/ show loading... as string in div and will show value from BE when status changes to 'hasValue' 
-
   if (currentTodo.state === 'loading') {
     return <div>  LOADING...  </div>
   }
   else if (currentTodo.state === 'hasValue') {
     return <div>
       {currentTodo.contents.title}
+      <br />
       {currentTodo.contents.description}
+      <br />
       <br />
     </div>
   }
@@ -42,9 +38,5 @@ function Todo({ id }) {
       an error came while fetching data from Back end :(
     </div>
   }
-
-
 }
-
-
 export default App
