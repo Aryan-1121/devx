@@ -2,11 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot, useRecoilValueLoadable } from 'recoil';
 import { todosAtomFamily } from './atoms';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return <RecoilRoot>
     <Todo id={1} />
@@ -21,14 +20,29 @@ function App() {
 
 
 
-function Todo({id}){
-  const currentTodo = useRecoilValue(todosAtomFamily(id));
+function Todo({ id }) {
+  // exactly similar to this we have useRecoilSetValueLoadabel and useRecoilStateLoadable
+  const currentTodo = useRecoilValueLoadable(todosAtomFamily(id));
+  // this currentTodo will have 2 important things 1st-> CONTENTS - actual data
+  // 2nd -> STATE -> (loading/ hasValue / hasError)
+  // so whenever we have currentTodo's state as 'loading' then we will log/ show loading... as string in div and will show value from BE when status changes to 'hasValue' 
 
-  return <div>
-    {currentTodo.title}
-    {currentTodo.description}
-    <br />
-  </div>
+  if (currentTodo.state === 'loading') {
+    return <div>  LOADING...  </div>
+  }
+  else if (currentTodo.state === 'hasValue') {
+    return <div>
+      {currentTodo.contents.title}
+      {currentTodo.contents.description}
+      <br />
+    </div>
+  }
+  else if( currentTodo.state === 'hasError'){
+    return <div>
+      an error came while fetching data from Back end :(
+    </div>
+  }
+
 
 }
 
