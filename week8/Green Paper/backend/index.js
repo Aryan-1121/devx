@@ -2,16 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose')
 const zod = require('zod');
 const { connectToMongoDB } = require('./db/db');
-
+const dotenv = require('dotenv')
 
 
 
 
 
 const app = express();
+app.use(express.json());
 
-
-
+dotenv.config();
 
 app.get('/', (req, res) => {
   res.send('root route from index')
