@@ -1,19 +1,24 @@
 const express = require('express');
 const zod = require('zod');
-const { connectToMongoDB } = require('./db/db');
 const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+
+const { connectToMongoDB } = require('./db/db');
 const rootRouter = require('./routes/index');
 
 
+dotenv.config();
+
 
 const app = express();
-app.use(express.json());
+app.use(express.json());      //body parser 
+app.use(cors())
 
 
 app.use('/api/v1', rootRouter)    // all requests starting with /api/v1 wil route to routes/route.js
 
 
-dotenv.config();
 
 app.get('/', (req, res) => {
   res.send('root route from index')
