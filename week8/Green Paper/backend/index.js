@@ -1,15 +1,17 @@
 const express = require('express');
-const mongoose = require('mongoose')
 const zod = require('zod');
 const { connectToMongoDB } = require('./db/db');
-const dotenv = require('dotenv')
-
-
+const dotenv = require('dotenv');
+const rootRouter = require('./routes/index');
 
 
 
 const app = express();
 app.use(express.json());
+
+
+app.use('/api/v1', rootRouter)    // all requests starting with /api/v1 wil route to routes/route.js
+
 
 dotenv.config();
 
