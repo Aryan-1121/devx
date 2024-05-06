@@ -10,8 +10,11 @@ const { connectToMongoDB } = require('./db/db');
 
 const app = express();
 
+
+
+
 app.get('/', (req, res) => {
-  res.send('root get ')
+  res.send('root route from index')
 })
 
 
