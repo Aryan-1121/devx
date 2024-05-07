@@ -143,28 +143,35 @@ router.post('/signin', async (req, res) => {
 
 router.put('/', authMiddleware, async (req, res) => {
   const body = req.body;
-  if (!body) {
-    res.status(411).json({
-      message: 'update body was empty'
+  try {
+    if (!body) {
+      return res.status(411).json({
+        message: 'update body was empty'
+      })
+    }
+    // zod validation of body
+    const { success } = updateZodSchema.safeParse(body);
+    if (!success) {
+      return res.status(411).json({
+        message: "incorrect inputs"
+      });
+    }
+
+    // if everything is fine get the userId of user(my) (form authMiddleware ) and update its details with new one
+
+    await User.updateOne({
+      _id: req.userId
+    }, req.body)
+
+    res.json({
+      message: 'updated Succesfully !'
     })
-  }
-  // zod validation of body
-  const { parsedBody } = updateZodSchema.safeParse(body);
-  if (!parsedBody) {
-    res.status(411).json({
-      message: "incorrect inputs"
-    });
+
+  } catch (error) {
+    console.log(error)
   }
 
-  // if everything is fine get the userId of user(my) (form authMiddleware ) and update its details with new one
 
-  await User.updateOne(req.body, {
-    id: req.userId
-  })
-
-  res.json({
-    message: 'updated Succesfully !'
-  })
 })
 
 
