@@ -16,6 +16,13 @@ router.get('/', (req, res) => {
 })
 
 
+const updateZodSchema = zod.object({
+  firstName: zod.string().optional(),
+  lastName: zod.string().optional(),
+  newPassword: zod.string().optional(),
+})
+
+
 const signupZodSchema = zod.object({
   firstName: zod.string(),
   lastName: zod.string(),
@@ -127,5 +134,36 @@ router.post('/signin', (req, res) => {
 
 }
 )
+
+
+router.put('/', authMiddleware, async (req, res) => {
+  const body = req.body;
+  if (!body) {
+    res.status(411).json({
+      message: 'update body was empty'
+    })
+  }
+  // zod validation of body
+  const { parsedBody } = updateZodSchema.safeParse(body);
+  if (!parsedBody) {
+    res.status(411).json({
+      message: "incorrect inputs"
+    });
+  }
+
+  // if everything is fine get the userId of user(my) (form authMiddleware ) and update its details with new one
+
+  await User.updateOne(req.body, {
+    id: req.userId
+  })
+
+  res.json({
+    message: 'updated Succesfully !'
+  })
+})
+
+
+
+
 
 module.exports = router; 

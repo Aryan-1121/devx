@@ -5,7 +5,9 @@ const authMiddleware = (req, res, next) => {
 
   const authorizationHeaderToken = req.headers.Authorization;
   if (!authorizationHeaderToken || !authorizationHeaderToken.startsWith('Bearer ')) {
-    return res.status(403).json({});
+    return res.status(403).json({
+      message: 'incorrect/ missing token',
+    });
   }
 
   const token = authorizationHeaderToken.split(' ')[1];
@@ -14,14 +16,17 @@ const authMiddleware = (req, res, next) => {
 
   if (!decodedToken) {
     res.status(403).json({
-      message: 'incorrect/ missing token',
+      message: 'incorrect token',
     })
   }
-  console.log(decodedToken);
-  req.userId = decodedToken.userId;
-
-  next();
-
+  if (decodedToken.userId) {
+    req.userId = decodedToken.userId;
+    next();
+  } else {
+    res.status(403).json({
+      message: 'incorrect/missing token',
+    })
+  }
 
 }
 
