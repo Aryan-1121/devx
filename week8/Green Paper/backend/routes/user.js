@@ -78,7 +78,45 @@ router.post('/signup', async (req, res) => {
 
 router.post('/signin', (req, res) => {
 
-  res.send('hello');
+
+  try {
+    const body = req.body;
+    const isBodyParsed = signinZodSchema.safeParse(body)
+    if (!isBodyParsed) {
+      res.status(411).json({
+        message: "incorrect inputs"
+      });
+    };
+
+    const user = User.findOne({
+      email: body.email,
+      password: body.password,
+    })
+
+    // checking if user with this email-pass  combination exist 
+    if (!user) {
+      res.status(411).json({
+        message: "invalid userName or password"
+      })
+    }
+
+    // if user is valid then generate token and send back as a response 
+    const token = jwt.sign({
+      userId: user._id,
+    }, JWT_SECRET);
+
+    res.json({
+      token: token
+    })
+
+  } catch (error) {
+    console.log('error while logging in : ', error)
+    res.status(411).json({
+      message: "Error while logging in"
+
+    })
+  }
+
 
 }
 )
