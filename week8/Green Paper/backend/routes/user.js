@@ -90,39 +90,44 @@ router.post('/signup', async (req, res) => {
 
 
 
-router.post('/signin', (req, res) => {
-
+router.post('/signin', async (req, res) => {
 
   try {
     const body = req.body;
-    const isBodyParsed = signinZodSchema.safeParse(body)
-    if (!isBodyParsed) {
-      res.status(411).json({
+    const { success } = signinZodSchema.safeParse(body)
+    if (!success) {
+      return res.status(411).json({
         message: "incorrect inputs"
       });
-    };
+    }
 
-    const user = User.findOne({
+    const user = await User.findOne({
       email: body.email,
       password: body.password,
     })
-
     // checking if user with this email-pass  combination exist 
     if (!user) {
-      res.status(411).json({
+      return res.status(411).json({
         message: "invalid userName or password"
       })
+
     }
 
     // if user is valid then generate token and send back as a response 
-    const token = jwt.sign({
-      userId: user._id,
-    }, JWT_SECRET);
+    if (user._id) {
+      const token = jwt.sign({
+        userId: user._id,
+      }, JWT_SECRET);
 
-    res.json({
-      token: token
-    })
-
+      res.json({
+        token: token
+      })
+      return;
+    } else {
+      return res.status(403).json({
+        message: 'no such user exists'
+      })
+    }
   } catch (error) {
     console.log('error while logging in : ', error)
     res.status(411).json({
