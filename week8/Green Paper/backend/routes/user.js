@@ -3,10 +3,17 @@ const zod = require('zod');
 const jwt = require('jsonwebtoken');
 
 const { User } = require('../models/User');
-const { JWT_SECRET } = require('../config')
-
-
+const { JWT_SECRET } = require('../config');
+const authMiddleware = require('../middleware/middleware');
 const router = express.Router();
+
+
+
+
+
+router.get('/', (req, res) => {
+  res.send('hii from user route')
+})
 
 
 const signupZodSchema = zod.object({
@@ -23,9 +30,11 @@ const signinZodSchema = zod.object({
 })
 
 
+
 router.post('/signup', async (req, res) => {
 
   const body = req.body;
+
   isBodyParsed = signupZodSchema.safeParse(body);
   if (!isBodyParsed) {
     res.status(411).json({
@@ -41,37 +50,35 @@ router.post('/signup', async (req, res) => {
   })
 
   if (isExistingUser) {
-    res.status(411).json({
+    res.status(401).json({
       message: 'user with this email already exist '
     })
+  } else {
+    try {
+      const user = await User.create({
+        firstName: body.firstName,
+        lastName: body.lastName,
+        email: body.email,
+        password: body.password,
+      });
+
+      // creating a jwt using userid
+      const userId = user._id;
+      const token = jwt.sign({ userId }, JWT_SECRET)
+
+
+      res.json({
+        message: "User created successfully",
+        token: token
+      })
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  try {
-    const user = await User.create({
-      firstName: body.firstName,
-      lastName: body.lastName,
-      email: body.email,
-      password: body.password,
-    });
-
-    // creating a jwt using userid
-    const userId = user._id;
-    const token = jwt.sign({ userId }, JWT_SECRET)
 
 
-    res.json({
-      message: "User created successfully",
-      token: token
-    })
-
-  } catch (error) {
-    res.status(401).json({
-      message: 'could not save user to DB'
-    })
-  }
-
-
-  res.send('this is sign-up from usre router ')
 })
 
 
