@@ -176,6 +176,40 @@ router.put('/', authMiddleware, async (req, res) => {
 
 
 
+// getting mathcing user from either firstName or lastName (from User table)
+router.get('/getMatchingUsers', async (req, res) => {
+
+  const filter = req.query.filter || '';
+
+  const users = await User.find({
+    $or: [{
+      firstName: {
+        "$regex": filter
+      }
+    },
+    {
+      lastName: {
+        '$regex': filter
+      }
+    }]
+  })
+
+  // we dont want to send whole user object (bcs it includes password too, => we will map the user to custom object which doesnot have password field and return it)
+
+  res.json({
+    user: users.map((user) => ({
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName
+    }))
+  });
+
+
+
+})
+
+
+
 
 
 module.exports = router; 
