@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());      //body parser 
-app.use(cors())
+app.use(cors())                 //Since our frontend and backend will be hosted on separate routes, we need to use cors middleware
 
 
 app.use('/api/v1', rootRouter)    // all requests starting with /api/v1 wil route to routes/route.js
